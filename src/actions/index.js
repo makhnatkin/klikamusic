@@ -15,7 +15,12 @@ export const loadData = () => {
 
     request.get(musicRequest)
       .then(
-        res => console.log(JSON.parse(res.text)),
+        res => {
+          dispatch({
+            type: LOAD_INITAIL_DATA__SUCCESS,
+            data: res
+          });
+        },
         error => console.log(error)
       )
   }
