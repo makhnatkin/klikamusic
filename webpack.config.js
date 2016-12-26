@@ -24,6 +24,9 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel',
         exclude: /node_modules/,
+        query: {
+          plugins: ['transform-class-properties']
+        }
       },
       {
         // https://github.com/jtangelder/sass-loader

@@ -12,4 +12,6 @@ export class App extends React.Component {
   }
 }
 
+// TODO: to add PropTypes
+
 export default App;

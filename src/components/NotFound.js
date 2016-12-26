@@ -11,3 +11,5 @@ export default class NotFound extends React.Component {
     );
   }
 }
+
+// TODO: to add PropTypes

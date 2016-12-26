@@ -4,16 +4,10 @@ import { connect } from "react-redux";
 // Actions
 import { loadData } from '../actions';
 
+import Table from './Table';
+
 // TODO: may be transfer to components?..
 const Loader = props => <h1>Loading...</h1>;
-const MusicBox = ({ musicList }) => <table>
-  {musicList.aTracks.map(({ artist_name, track_title, album_id }) => <tr>
-    <td>{artist_name}</td>
-    <td>{track_title}</td>
-    <td>{album_id}</td>
-  </tr>)}
-</table>;
-
 
 // Main page component
 export class Main extends React.Component {
@@ -34,7 +28,7 @@ export class Main extends React.Component {
 
     return (
       <div className="page-home">
-      	<MusicBox musicList={music} />
+      	<Table musicList={music} />
       </div>
     );
   }
@@ -45,5 +39,7 @@ const mapStateToProps = ({ musicBox: {music=[], isLoaded} }) => ({
   music,
   isLoaded
 });
+
+// TODO: to add PropTypes
 
 export default connect(mapStateToProps)(Main);

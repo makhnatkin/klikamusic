@@ -1,5 +1,7 @@
 import request from 'superagent-bluebird-promise';
 const musicRequest = 'https://freemusicarchive.org/featured.json';
+// const musicRequest = 'https://freemusicarchive.org/recent.json';
+
 
 // action types
 export const LOAD_INITAIL_DATA__START = 'LOAD_INITAIL_DATA__START';
