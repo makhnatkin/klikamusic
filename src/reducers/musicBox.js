@@ -9,6 +9,7 @@ const defaultState = {
   isLoaded: false
 }
 
+// TODO: to transfer to utils
 const generateMusic = musicArray => {
   const genres = [
     'Alternative Music',
@@ -57,7 +58,7 @@ const generateMusic = musicArray => {
     const artist = (randomInteger(1, 3) === 1) ? randomArtist : artist_name;
     
     return {
-      id: i,
+      id: i + 1,
       artist,
       track: track_title,
       genre: genres[randomInteger(0, 21)],
@@ -78,7 +79,7 @@ export default (state=defaultState, action) => {
       return {
         ...state,
         isLoaded: true,
-        music: generateMusic(data.text)
+        music: generateMusic(data.text) // a little magic (like mock generator)
       };
 
     case LOAD_INITAIL_DATA__START:

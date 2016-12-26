@@ -1,9 +1,10 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
 
 // Actions
 import { loadData } from '../actions';
 
+// Components
 import Table from './Table';
 
 // TODO: may be transfer to components?..
