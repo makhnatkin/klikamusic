@@ -4,6 +4,7 @@ import { syncHistoryWithStore, routerMiddleware } from "react-router-redux";
 import createSagaMiddleware from "redux-saga";
 import freeze from "redux-freeze";
 import { reducers } from "./reducers/index";
+import thunk from 'redux-thunk';
 
 // add the middlewares
 let middlewares = [];
@@ -15,6 +16,8 @@ middlewares.push(routerMiddleware(browserHistory));
 if (process.env.NODE_ENV !== 'production') {
   middlewares.push(freeze);
 }
+
+middlewares.push(thunk);
 
 // apply the middleware
 let middleware = applyMiddleware(...middlewares);

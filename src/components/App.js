@@ -1,9 +1,7 @@
-import React from "react";
-import "../stylesheets/main.scss";
+import React from 'react';
 
-// app component
-export default class App extends React.Component {
-  // render
+// App component
+export class App extends React.Component {
   render() {
     return (
       <div className="container">
@@ -12,3 +10,7 @@ export default class App extends React.Component {
     );
   }
 }
+
+// TODO: to add PropTypes
+
+export default App;

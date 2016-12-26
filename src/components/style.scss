@@ -1,0 +1,45 @@
+/* TODO: to otimize styles for IE */
+
+.music-table {
+  margin: 30px auto;
+  border-radius: 5px;
+  overflow: hidden;
+  font-size: 1.2em;
+
+  &__table {
+  	width: 100%;
+  }
+  &__row:nth-child(even) {
+    background: #F9F9F9;
+    border-bottom: 1px solid #DDD; 
+  }
+  &__row:nth-child(odd) {
+    background: #EFF0F0;
+    border-bottom: 1px solid #DDD;
+  }
+
+  &__head-cell {
+    padding: 10px;
+    background: #999;
+    color: #FFF;
+  }
+  &__cell {
+    padding: 5px 10px;
+  }
+  &__head-cell_first {
+    padding-left: 30px;
+    border-left: 1px solid #999;
+  }
+  &__cell_first {
+    padding-left: 30px;
+    border-left: 1px solid #DDD;
+  }
+  &__head-cell_last {
+    padding-right: 30px;
+    border-right: 1px solid #999;
+  }
+  &__cell_last {
+    padding-right: 30px;
+    border-right: 1px solid #DDD;
+  }
+}
