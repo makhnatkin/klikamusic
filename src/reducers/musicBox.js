@@ -2,13 +2,17 @@
 import {
   LOAD_INITAIL_DATA__START,
   LOAD_INITAIL_DATA__SUCCESS,
-  LOAD_INITAIL_DATA__FAIL
+  LOAD_INITAIL_DATA__FAIL,
+  SET_PAGE
 } from '../actions';
 
 const defaultState = {
-  isLoaded: false
+  isLoaded: false,
+  rowsCount: 15,
+  page: 0
 }
 
+// ------------------------- begin logic utils 
 // TODO: to transfer to utils
 const generateMusic = musicArray => {
   const genres = [
@@ -68,19 +72,43 @@ const generateMusic = musicArray => {
 
   return music;
 }
+// ------------------------- end logic utils 
 
 // Reducer
 export default (state=defaultState, action) => {
-  const { type, data } = action;
+  const { type, data, page } = action;
 
   switch (type) {
-    case LOAD_INITAIL_DATA__SUCCESS:
-      //  TODO: to add data.text verify
-      return {
-        ...state,
-        isLoaded: true,
-        music: generateMusic(data.text) // a little magic (like mock generator)
-      };
+    case LOAD_INITAIL_DATA__SUCCESS: 
+      return (() => {
+        const { page, rowsCount } = state;
+
+        // a little magic (like mock generator)
+        //  TODO: to add data.text verify
+        const allMusic = generateMusic(data.text)
+        const pagesCount = allMusic.length / rowsCount;
+        const music = [...allMusic].splice(page * rowsCount, rowsCount); 
+
+        return {
+          ...state,
+          isLoaded: true,
+          allMusic,
+          music,
+          pagesCount 
+        };
+      })();
+
+    case SET_PAGE: 
+      return (() => {
+        const { rowsCount, allMusic } = state;
+        const music = [...allMusic].splice(page * rowsCount, rowsCount); 
+
+        return {
+          ...state,
+          music,
+          page,
+        };
+      })();
 
     case LOAD_INITAIL_DATA__START:
     case LOAD_INITAIL_DATA__FAIL:

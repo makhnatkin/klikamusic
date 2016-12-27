@@ -20,7 +20,8 @@ export class Table extends React.Component {
     }
     return musicList.map(({ id, artist, track, genre, year }) =>
       <tr className={row} key={id}>
-        <td className={firstCell}>{artist}</td>
+        <td className={firstCell}>{id}</td>
+        <td className={cell}>{artist}</td>
         <td className={cell}>{track}</td>
         <td className={cell}>{genre}</td>
         <td className={lastCell}>{year}</td>
@@ -58,7 +59,8 @@ export class Table extends React.Component {
 
     const tableHeader = <thead>
       <tr className={classes.headRow}>
-        <th className={classes.firstHeadCell}>Artist</th>
+        <th className={classes.firstHeadCell}>ID</th>
+        <th className={classes.headCell}>Artist</th>
         <th className={classes.headCell}>Track</th>
         <th className={classes.headCell}>Genre</th>
         <th className={classes.lastHeadCell}>Year</th>
