@@ -3,13 +3,15 @@ import {
   LOAD_INITAIL_DATA__START,
   LOAD_INITAIL_DATA__SUCCESS,
   LOAD_INITAIL_DATA__FAIL,
-  SET_PAGE
+  SET_PAGE,
+  SET_PAGE_COUNT
 } from '../actions';
 
 const defaultState = {
   isLoaded: false,
-  rowsCount: 15,
-  page: 0
+  rowsCount: 10,
+  page: 0,
+  counts: [10, 20, 50, 100]
 }
 
 // ------------------------- begin logic utils 
@@ -76,7 +78,7 @@ const generateMusic = musicArray => {
 
 // Reducer
 export default (state=defaultState, action) => {
-  const { type, data, page } = action;
+  const { type, data, page, count } = action;
 
   switch (type) {
     case LOAD_INITAIL_DATA__SUCCESS: 
@@ -107,6 +109,21 @@ export default (state=defaultState, action) => {
           ...state,
           music,
           page,
+        };
+      })();
+
+    case SET_PAGE_COUNT: 
+      return (() => {
+        const { allMusic } = state;
+        const music = [...allMusic].splice(0, count); 
+        const pagesCount = allMusic.length / count;
+
+        return {
+          ...state,
+          music,
+          page: 0,
+          pagesCount,
+          rowsCount: count,
         };
       })();
 

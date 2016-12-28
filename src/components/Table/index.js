@@ -57,6 +57,7 @@ export class Table extends React.Component {
       })
     };
 
+    // const handleHeadCellClick = sortBy => dispatch(setSort('id')
     const tableHeader = <thead>
       <tr className={classes.headRow}>
         <th className={classes.firstHeadCell}>ID</th>
