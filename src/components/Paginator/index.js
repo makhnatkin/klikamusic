@@ -2,50 +2,44 @@ import React from 'react';
 import './style.scss';
 import cx from 'classnames';
 
+import Button from '../Button/';
+
 // Table component
 export class Paginator extends React.Component {
   static defaultProps = {
     // TODO: to add CSSModules
-    blockClass: 'paginator'
+    className: 'paginator'
   };
 
-  // static propTypes = {
-  //   blockClass: PropTypes.string,
-  // };
+  static propTypes = {
+    className: React.PropTypes.string.isRequired,
+    count: React.PropTypes.number,
+    current: React.PropTypes.number,
+    handleClick: React.PropTypes.func,
+  };
 
   render() {
-    const { count, current, handleClick, blockClass } = this.props;
-    const tempStyle = {
-      float: 'left',
-      width: '40px',
-      textAlign: 'center',
-      padding: '7px',
-      borderRadius: '3px',
-      border: '1px solid #999',
-      background: '#EEE',
-      cursor: 'pointer',
-      marginRight: '5px' 
-    };
+    const { count, current, handleClick, className } = this.props;
 
     const pages = [];
     for (let i = 0; i < count; i++) {
-      pages.push(<div
-        style={tempStyle}
-        onClick={() => handleClick(i)}
-        key={i}
-        id={i}>
-        {i + 1}
-      </div>)
+      pages.push(
+        <Button
+          onClick={() => handleClick(i)}
+          float={true}
+          key={i}
+          id={i}>
+          {i + 1}
+        </Button>
+      )
     }
 
     return (
-      <div style={{overflow: 'hidden', marginBottom: '20px'}} className={blockClass}>
+      <div style={{overflow: 'hidden', marginBottom: '20px'}} className={className}>
         {pages}
       </div>
     );
   }
 }
-
-// TODO: to add PropTypes
 
 export default Paginator;

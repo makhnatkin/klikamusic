@@ -6,19 +6,20 @@ import cx from 'classnames';
 export class Table extends React.Component {
   static defaultProps = {
     // TODO: to add CSSModules
-    blockClass: 'music-table'
+    className: 'music-table'
   };
 
-  // static propTypes = {
-  //   blockClass: PropTypes.string,
-  // };
+  static propTypes = {
+    className: React.PropTypes.string.isRequired,
+    data: React.PropTypes.array
+  };
 
-  renderRows(musicList=[], classes={}) {
+  renderRows(data=[], classes={}) {
     const { firstCell, row, cell, lastCell } = classes;
-    if (musicList.length < 1) {
+    if (data.length < 1) {
       return null;
     }
-    return musicList.map(({ id, artist, track, genre, year }) =>
+    return data.map(({ id, artist, track, genre, year }) =>
       <tr className={row} key={id}>
         <td className={firstCell}>{id}</td>
         <td className={cell}>{artist}</td>
@@ -29,31 +30,32 @@ export class Table extends React.Component {
   }
 
   render() {
-    const { blockClass, children, musicList } = this.props;
+    const { className, children, data } = this.props;
     
     // classes (BEM)
     const classes = {
-      table: `${blockClass}__table`,
-      headRow: `${blockClass}__head-row`,
-      headCell: `${blockClass}__head-cell`,
-      row: `${blockClass}__row`,
-      cell: `${blockClass}__cell`,
+      blockClass: `${className}`,
+      table: `${className}__table`,
+      headRow: `${className}__head-row`,
+      headCell: `${className}__head-cell`,
+      row: `${className}__row`,
+      cell: `${className}__cell`,
       firstCell: cx({
-        [`${blockClass}__cell`]: true,
-        [`${blockClass}__cell_first`]: true
+        [`${className}__cell`]: true,
+        [`${className}__cell_first`]: true
       }),
       lastCell: cx({
-        [`${blockClass}__cell`]: true,
-        [`${blockClass}__cell_last`]: true
+        [`${className}__cell`]: true,
+        [`${className}__cell_last`]: true
       }),
       // TODO: to optimize classnaming
       firstHeadCell: cx({
-        [`${blockClass}__head-cell`]: true,
-        [`${blockClass}__head-cell_first`]: true
+        [`${className}__head-cell`]: true,
+        [`${className}__head-cell_first`]: true
       }),
       lastHeadCell: cx({
-        [`${blockClass}__head-cell`]: true,
-        [`${blockClass}__head-cell_last`]: true
+        [`${className}__head-cell`]: true,
+        [`${className}__head-cell_last`]: true
       })
     };
 
@@ -69,18 +71,16 @@ export class Table extends React.Component {
     </thead>;
     
     return (
-      <div className={blockClass}>
+      <div className={classes.blockClass}>
         <table className={classes.table}>
           {tableHeader}
           <tbody>
-            {this.renderRows(musicList, classes)}
+            {this.renderRows(data, classes)}
           </tbody>
         </table>
       </div>
     );
   }
 }
-
-// TODO: to add PropTypes
 
 export default Table;

@@ -30,7 +30,7 @@ export class Main extends React.Component {
 
     return (
       <div className="page-home">
-        <Table musicList={music} />
+        <Table data={music} />
         <Paginator
           count={pagesCount}
           current={page}
