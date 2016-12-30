@@ -73,6 +73,11 @@ export class Table extends React.Component {
     return (
       <div className={classes.blockClass}>
         <table className={classes.table}>
+          <col width="5%" />
+          <col width="33%" />        
+          <col width="37%" />
+          <col width="18%" />        
+          <col width="7%" />
           {tableHeader}
           <tbody>
             {this.renderRows(data, classes)}

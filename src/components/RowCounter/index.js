@@ -2,7 +2,7 @@ import React from 'react';
 import './style.scss';
 import cx from 'classnames';
 
-import Button from '../Button/';
+import Button, { modificators } from '../Button/';
 
 // Table component
 export class RowCounter extends React.Component {
@@ -22,15 +22,16 @@ export class RowCounter extends React.Component {
     const { counts, current, handleClick, className } = this.props;
 
     const countsComponent = counts.map(count => <Button
+      active={current === count}
       onClick={() => handleClick(count)}
-      float={true}
+      mod={[modificators.float]}
       key={count}
       id={count}>
       {count}
     </Button>)
 
     return (
-      <div style={{overflow: 'hidden'}} className={className}>
+      <div className={className}>
         {countsComponent}
       </div>
     );

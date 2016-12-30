@@ -7,21 +7,36 @@ export class Button extends React.Component {
   static defaultProps = {
     // TODO: to add CSSModules
     className: 'button',
-    float: false
+    active: false
   };
 
   static propTypes = {
     className: React.PropTypes.string.isRequired,
     onClick: React.PropTypes.func,
-    float: React.PropTypes.bool
+    mod: React.PropTypes.array,
+    active: React.PropTypes.bool
   };
 
   render() {
-    const { onClick, className, float, children } = this.props;
+    const {
+      onClick,
+      className,
+      children,
+      mod,
+      active
+    } = this.props;
+    
+    let modificators = '';
+    if (mod instanceof Array && mod.length > 0) {
+      mod.forEach(modificator => {
+        modificators += ` ${className}_${modificator}`
+      });
+    }
 
     const blockClass = cx({
       [`${className}`]: true,
-      [`${className}_float`]: float
+      [`${modificators}`]: !!modificators,
+      [`${className}_active`]: active
     });
 
     return (
@@ -31,5 +46,13 @@ export class Button extends React.Component {
     );
   }
 }
+
+export const modificators = {
+  arrow: {
+    left: 'left',
+    right: 'right'
+  },
+  float: 'float'
+};
 
 export default Button;

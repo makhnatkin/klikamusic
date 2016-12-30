@@ -6,8 +6,69 @@
   border: 1px solid #999;
   background: #EEE;
   cursor: pointer;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Chrome/Safari/Opera */
+  -khtml-user-select: none; /* Konqueror */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+}
+.button:hover {
+  background: #DEDEDE;
 }
 .button_float {
   float: left;
   margin-right: 5px;
+}
+.button_left,
+.button_right {
+  border: 0;
+  background: none;
+}
+.button_left:hover,
+.button_right:hover {
+  color: #222;
+  background: none;
+}
+.button_left::before {
+  content: " ";
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 11px solid transparent;
+  border-right: 14px solid #CCC;
+  border-bottom: 11px solid transparent;
+  position: relative;
+  right: -11px;
+}
+.button_right::before {
+  content: " ";
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 11px solid transparent;
+  border-left: 14px solid #CCC;
+  border-bottom: 11px solid transparent;
+}
+.button_left:hover::before {
+  content: " ";
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 11px solid transparent;
+  border-right: 14px solid #222;
+  border-bottom: 11px solid transparent;
+}
+.button_right:hover::before {
+  content: " ";
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 11px solid transparent;
+  border-left: 14px solid #222;
+  border-bottom: 11px solid transparent;
+}
+.button_active,
+.button_active:hover {
+  background: #CCDDEF;
 }
