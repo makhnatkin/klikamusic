@@ -5,8 +5,10 @@ const musicRequest = 'https://freemusicarchive.org/featured.json';
 
 // action types
 export const LOAD_INITAIL_DATA__START = 'LOAD_INITAIL_DATA__START';
-export const LOAD_INITAIL_DATA__SUCCESS = 'LOAD_INITAIL__SUCCESS';
+export const LOAD_INITAIL_DATA__SUCCESS = 'LOAD_INITAIL_DATA__SUCCESS';
 export const LOAD_INITAIL_DATA__FAIL = 'LOAD_INITAIL_DATA__FAIL';
+export const SET_PAGE = 'SET_PAGE';
+export const SET_PAGE_COUNT = 'SET_PAGE_COUNT';
 
 // action creaters
 export const loadData = () => {
@@ -27,3 +29,13 @@ export const loadData = () => {
       )
   }
 };
+
+export const setPage = page => ({
+  type: SET_PAGE,
+  page 
+});
+
+export const setPageCount = count => ({
+  type: SET_PAGE_COUNT,
+  count 
+});

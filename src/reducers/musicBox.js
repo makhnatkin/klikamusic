@@ -2,85 +2,70 @@
 import {
   LOAD_INITAIL_DATA__START,
   LOAD_INITAIL_DATA__SUCCESS,
-  LOAD_INITAIL_DATA__FAIL
+  LOAD_INITAIL_DATA__FAIL,
+  SET_PAGE,
+  SET_PAGE_COUNT
 } from '../actions';
 
+import { generateMusic } from "../utils/generateMusic"
+
 const defaultState = {
-  isLoaded: false
-}
-
-// TODO: to transfer to utils
-const generateMusic = musicArray => {
-  const genres = [
-    'Alternative Music',
-    'Blues',
-    'Classical Music',
-    'Country Music',
-    'Dance Music',
-    'Easy Listening',
-    'Electronic Music',
-    'Folk',
-    'Rap',
-    'Indie Pop',
-    'Inspirational (incl. Gospel)',
-    'Asian Pop',
-    'Jazz',
-    'Latin Music',
-    'New Age',
-    'Opera',
-    'Pop',
-    'R&B',
-    'Reggae',
-    'Rock',
-    'Singer',
-    'World Music',
-  ];
-
-  const randomInteger = (min, max) => {
-    const rand = min + Math.random() * (max - min)
-    return Math.round(rand);
-  }
-
-  const randomArtist = 'Dima Dylan';
-
-
-  let music = [];
-  musicArray = JSON.parse(musicArray);
-
-  // TODO: to add aTracks verify
-  music = musicArray.aTracks.map((item, i) => {
-
-    const {
-      artist_name,
-      track_title,
-    } = item;
-    
-    const artist = (randomInteger(1, 3) === 1) ? randomArtist : artist_name;
-    
-    return {
-      id: i + 1,
-      artist,
-      track: track_title,
-      genre: genres[randomInteger(0, 21)],
-      year: randomInteger(1950, 2016)
-    }
-  });
-
-  return music;
+  isLoaded: false,
+  rowsCount: 10,
+  page: 0,
+  counts: [10, 20, 55, 100]
 }
 
 // Reducer
 export default (state=defaultState, action) => {
-  const { type, data } = action;
+  const { type, data, page, count } = action;
 
   switch (type) {
-    case LOAD_INITAIL_DATA__SUCCESS:
-      //  TODO: to add data.text verify
-      return {
-        ...state,
-        isLoaded: true,
-        music: generateMusic(data.text) // a little magic (like mock generator)
-      };
+    case LOAD_INITAIL_DATA__SUCCESS: 
+      return (() => {
+        const { page, rowsCount } = state;
+
+        // a little magic (like mock generator)
+        // TODO: to add data.text verify
+        const allMusic = generateMusic(data.text)
+        const pagesCount = allMusic.length / rowsCount;
+        const music = [...allMusic].splice(page * rowsCount, rowsCount); 
+
+        return {
+          ...state,
+          isLoaded: true,
+          allMusic,
+          music,
+          pagesCount 
+        };
+      })();
+
+    case SET_PAGE: 
+      return (() => {
+        const { rowsCount, allMusic } = state;
+        const music = [...allMusic].splice(page * rowsCount, rowsCount); 
+
+        return {
+          ...state,
+          music,
+          page,
+        };
+      })();
+
+    case SET_PAGE_COUNT: 
+      return (() => {
+        const { allMusic } = state;
+        const music = [...allMusic].splice(0, count); 
+        const pagesCount = allMusic.length / count;
+
+        return {
+          ...state,
+          music,
+          page: 0,
+          pagesCount,
+          rowsCount: count,
+        };
+      })();
 
     case LOAD_INITAIL_DATA__START:
     case LOAD_INITAIL_DATA__FAIL:

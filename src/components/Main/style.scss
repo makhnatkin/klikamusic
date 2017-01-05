@@ -1,0 +1,15 @@
+.page-home {
+  &__footer {
+    overflow: hidden;
+    margin: 0 0 50px;
+  }
+  &__footer-left {
+    width: 70%;
+    overflow: hidden;
+  }
+  &__footer-right {
+    max-width: 30%;
+    float: right;
+  }
+}
+
