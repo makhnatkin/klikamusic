@@ -8,7 +8,8 @@ import { connect } from 'react-redux';
 import {
   loadData,
   setPage,
-  setPageCount
+  setPageCount,
+  sortBy
 } from '../../actions';
 
 // Components
@@ -44,6 +45,7 @@ export class Main extends React.Component {
       dispatch,
       counts,
       rowsCount,
+      sortId,
       className
     } = this.props;
     
@@ -70,7 +72,7 @@ export class Main extends React.Component {
     return (
       <div className={blockClass}>
         <div className={contentClass}>
-          <Table data={music} />
+          <Table data={music} sortId={sortId} handleHeadCellClick={(id, direction) => dispatch(sortBy(id, direction))} />
         </div>
 
         <div className={footerClass}>

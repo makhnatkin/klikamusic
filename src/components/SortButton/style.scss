@@ -1,0 +1,44 @@
+.sort-button {
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-block;
+}
+.sort-button__text {
+  display: inline-block;
+}
+.sort-button__arrows {
+  height: 1em;
+  width: 1em;
+  position: relative;
+  top: .15em;
+  display: inline-block;
+  left: .2em;
+}
+.sort-button__arrows::before {
+  content: " ";
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 5px solid #FFF;
+  position: absolute;
+  top: 0;
+  opacity: .3;
+}
+.sort-button__arrows::after {
+  content: " ";
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 5px solid #FFF;
+  position: absolute;
+  bottom: 0;
+  opacity: .3;
+}
+.sort-button__arrows_up::before,
+.sort-button__arrows_down::after {
+  opacity: 1;
+}

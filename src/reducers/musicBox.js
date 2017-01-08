@@ -4,21 +4,22 @@ import {
   LOAD_INITAIL_DATA__SUCCESS,
   LOAD_INITAIL_DATA__FAIL,
   SET_PAGE,
-  SET_PAGE_COUNT
+  SET_PAGE_COUNT,
+  SET_SORT_ID
 } from '../actions';
 
-import { generateMusic } from "../utils/generateMusic"
+import { generateMusic, sortBy } from '../utils';
 
 const defaultState = {
   isLoaded: false,
   rowsCount: 10,
   page: 0,
   counts: [10, 20, 55, 100]
-}
+};
 
 // Reducer
 export default (state=defaultState, action) => {
-  const { type, data, page, count } = action;
+  const { type, data, page, count, sortId, sortDirection } = action;
 
   switch (type) {
     case LOAD_INITAIL_DATA__SUCCESS: 
@@ -48,7 +49,7 @@ export default (state=defaultState, action) => {
         return {
           ...state,
           music,
-          page,
+          page
         };
       })();
 
@@ -63,7 +64,24 @@ export default (state=defaultState, action) => {
           music,
           page: 0,
           pagesCount,
-          rowsCount: count,
+          rowsCount: count
+        };
+      })();
+
+    case SET_SORT_ID: 
+      return (() => {
+        let { allMusic, rowsCount } = state;
+        const type = sortId === 'id' ? 'number' : 'string';
+        allMusic = sortBy(allMusic, sortId, type, sortDirection);
+        const music = [...allMusic].splice(0, rowsCount); 
+
+        return {
+          ...state,
+          page: 0,
+          sortId,
+          sortDirection,
+          music,
+          allMusic
         };
       })();
 
@@ -72,4 +90,4 @@ export default (state=defaultState, action) => {
     default:
       return state;
   }
-}
+};

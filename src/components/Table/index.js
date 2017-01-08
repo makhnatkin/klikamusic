@@ -2,6 +2,8 @@ import React from 'react';
 import './style.scss';
 import cx from 'classnames';
 
+import SortButton from '../SortButton/';
+
 // Table component
 export class Table extends React.Component {
   static defaultProps = {
@@ -13,6 +15,61 @@ export class Table extends React.Component {
     className: React.PropTypes.string.isRequired,
     data: React.PropTypes.array
   };
+
+  renderHeader(classes={}) {
+    const { sortId, handleHeadCellClick } = this.props; 
+
+    return(
+      <thead>
+        <tr className={classes.headRow}>
+          <th className={classes.firstHeadCell}>
+            <SortButton
+              onClick={handleHeadCellClick}
+              id="id"
+              active={sortId === 'id'}>
+              ID
+            </SortButton>
+          </th>
+
+          <th className={classes.headCell}>
+            <SortButton
+              onClick={handleHeadCellClick}
+              id="artist"
+              active={sortId === 'artist'}>
+              Artist
+            </SortButton>
+          </th>
+
+          <th className={classes.headCell}>
+            <SortButton
+              onClick={handleHeadCellClick}
+              id="track"
+              active={sortId === 'track'}>
+              Track
+            </SortButton>
+          </th>
+
+          <th className={classes.headCell}>
+            <SortButton
+              onClick={handleHeadCellClick}
+              id="genre"
+              active={sortId === 'genre'}>
+              Genre
+            </SortButton>
+          </th>
+
+          <th className={classes.lastHeadCell}>
+            <SortButton
+              onClick={handleHeadCellClick}
+              id="year"
+              active={sortId === 'year'}>
+              Year
+            </SortButton>
+          </th>
+        </tr>
+      </thead>
+    );
+  }
 
   renderRows(data=[], classes={}) {
     const { firstCell, row, cell, lastCell } = classes;
@@ -26,7 +83,8 @@ export class Table extends React.Component {
         <td className={cell}>{track}</td>
         <td className={cell}>{genre}</td>
         <td className={lastCell}>{year}</td>
-      </tr>);
+      </tr>
+    );
   }
 
   render() {
@@ -59,26 +117,17 @@ export class Table extends React.Component {
       })
     };
 
-    // const handleHeadCellClick = sortBy => dispatch(setSort('id')
-    const tableHeader = <thead>
-      <tr className={classes.headRow}>
-        <th className={classes.firstHeadCell}>ID</th>
-        <th className={classes.headCell}>Artist</th>
-        <th className={classes.headCell}>Track</th>
-        <th className={classes.headCell}>Genre</th>
-        <th className={classes.lastHeadCell}>Year</th>
-      </tr>
-    </thead>;
-    
     return (
       <div className={classes.blockClass}>
         <table className={classes.table}>
-          <col width="5%" />
-          <col width="33%" />        
-          <col width="37%" />
-          <col width="18%" />        
-          <col width="7%" />
-          {tableHeader}
+          <colgroup>
+            <col width="5%" />
+            <col width="33%" />
+            <col width="37%" />
+            <col width="18%" />
+            <col width="7%" />
+          </colgroup>
+          {this.renderHeader(classes)}
           <tbody>
             {this.renderRows(data, classes)}
           </tbody>
