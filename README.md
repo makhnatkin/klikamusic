@@ -16,15 +16,15 @@ TASK-4: Добавить фильтр
 TASK-5: Добавить сортировку  
 
 ### Дополнительно
-TASK-6: Причесать верстку
-TASK-7: Рефакторинг: вынести общие модули
-TASK-8: Добавить тесты JUST
+TASK-6: Причесать верстку  
+TASK-7: Рефакторинг: вынести общие модули  
+TASK-8: Добавить тесты JUST  
 
 ### Будущее
-TASK-9: Добавить React Bootstrap или Materials
-TASK-10: Добавить CSS modules
-TASK-11: Рефакторинг: redux-act
-TASK-12: Рефакторинг: redux-saga
+TASK-9: Добавить React Bootstrap или Materials  
+TASK-10: Добавить CSS modules  
+TASK-11: Рефакторинг: redux-act  
+TASK-12: Рефакторинг: redux-saga  
 
 
 
