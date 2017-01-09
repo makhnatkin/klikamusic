@@ -10,6 +10,7 @@ export const LOAD_INITAIL_DATA__FAIL = 'LOAD_INITAIL_DATA__FAIL';
 export const SET_PAGE = 'SET_PAGE';
 export const SET_PAGE_COUNT = 'SET_PAGE_COUNT';
 export const SET_SORT_ID = 'SET_SORT_ID';
+export const SET_FILTER = 'SET_FILTER';
 
 // action creaters
 export const loadData = () => {
@@ -45,4 +46,10 @@ export const sortBy = (sortId, sortDirection) => ({
   type: SET_SORT_ID,
   sortId,
   sortDirection 
+});
+
+export const setFilter = (filterId, filterBy) => ({
+  type: SET_FILTER,
+  filterId,
+  filterBy 
 });

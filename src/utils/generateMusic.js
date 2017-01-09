@@ -37,11 +37,7 @@ export const generateMusic = musicArray => {
   // TODO: to add aTracks verify
   music = musicArray.aTracks.map((item, i) => {
 
-    const {
-      artist_name,
-      track_title,
-    } = item;
-    
+    const { artist_name, track_title } = item;
     const artist = (randomInteger(1, 3) === 1) ? randomArtist : artist_name;
     
     return {
