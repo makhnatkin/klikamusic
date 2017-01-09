@@ -1,4 +1,12 @@
 .page-home {
+  &__content-left {
+    width: 70%;
+    overflow: hidden;
+  }
+  &__content-right {
+    max-width: 30%;
+    float: right;
+  }
   &__footer {
     overflow: hidden;
     margin: 0 0 50px;

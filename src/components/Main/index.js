@@ -9,13 +9,15 @@ import {
   loadData,
   setPage,
   setPageCount,
-  sortBy
+  sortBy,
+  setFilter
 } from '../../actions';
 
 // Components
 import Table from '../Table/';
 import Paginator from '../Paginator/';
 import RowCounter from '../RowCounter/';
+import Select from '../Select/';
 
 const Loader = props => <h1>Loading...</h1>;
 
@@ -46,7 +48,10 @@ export class Main extends React.Component {
       counts,
       rowsCount,
       sortId,
-      className
+      className,
+      artists,
+      years,
+      genres
     } = this.props;
     
     if (!isLoaded) {
@@ -58,12 +63,16 @@ export class Main extends React.Component {
     const [
       blockClass,
       contentClass,
+      contentLeft,
+      contentRight,
       footerClass,
       footerLeftClass,
       footerRightClass
     ] = [
       className,
       `${className}__content`,
+      `${className}__content-left`,
+      `${className}__content-right`,
       `${className}__footer`,
       `${className}__footer-left`,
       `${className}__footer-right`
@@ -72,27 +81,36 @@ export class Main extends React.Component {
     return (
       <div className={blockClass}>
         <div className={contentClass}>
-          <Table data={music} sortId={sortId} handleHeadCellClick={(id, direction) => dispatch(sortBy(id, direction))} />
-        </div>
-
-        <div className={footerClass}>
-          <div className={footerRightClass}>
-            <RowCounter
-              counts={counts}
-              current={rowsCount}
-              handleClick={count => dispatch(setPageCount(count))}
-            />
+          <div className={contentRight}>
+            <h4>Исполнитель</h4>
+            <Select list={artists} onChange={(artist) => dispatch(setFilter('artist', artist))} />
+            <h4>Жанр</h4>
+            <Select list={genres} onChange={(genre) => dispatch(setFilter('genre', genre))} />
+            <h4>Год</h4>
+            <Select list={years} onChange={(year) => dispatch(setFilter('year', year))} />
           </div>
+          <div className={contentLeft}>
+            <Table data={music} sortId={sortId} handleHeadCellClick={(id, direction) => dispatch(sortBy(id, direction))} />
+            <div className={footerClass}>
+              <div className={footerRightClass}>
+                <RowCounter
+                  counts={counts}
+                  current={rowsCount}
+                  handleClick={count => dispatch(setPageCount(count))}
+                />
+              </div>
 
-          <div className={footerLeftClass}>
-            <Paginator
-              count={pagesCount}
-              current={page}
-              handleClick={page => dispatch(setPage(page))}
-            />
+              <div className={footerLeftClass}>
+                <Paginator
+                  count={pagesCount}
+                  current={page}
+                  handleClick={page => dispatch(setPage(page))}
+                />
+              </div>
+            </div>
+
           </div>
         </div>
-        
       </div>
     );
   }
